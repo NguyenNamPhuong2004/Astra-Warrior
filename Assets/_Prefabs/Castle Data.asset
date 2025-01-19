@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eff0f19d508dd9a4fa04bdd0a870ef7e, type: 3}
+  m_Name: Castle Data
+  m_EditorClassIdentifier: 
+  shopCastle:
+    ItemName: Castle
+    unlockCost: 1000
+    unlockedLevel: 0
+    castleLevel:
+    - heathMax: 8000
+      armor: 80
+    - heathMax: 9000
+      armor: 90
+    - heathMax: 11500
+      armor: 115
+    - heathMax: 13000
+      armor: 130
+    - heathMax: 15000
+      armor: 150
+  shopArrows:
+    ItemName: Arrows
+    unlockCost: 1000
+    unlockedLevel: 0
+    arrowsLevel:
+    - damage: 20
+      timeSkill: 20
+    - damage: 25
+      timeSkill: 18
+    - damage: 35
+      timeSkill: 15
+    - damage: 47
+      timeSkill: 12
+    - damage: 60
+      timeSkill: 8
+  shopFood:
+    ItemName: Food
+    unlockCost: 0
+    unlockedLevel: 0
+    foodLevel:
+    - foodMax: 50
+      foodSpeed: 2
+    - foodMax: 100
+      foodSpeed: 3
+    - foodMax: 150
+      foodSpeed: 4
+    - foodMax: 200
+      foodSpeed: 5
+    - foodMax: 250
+      foodSpeed: 6
