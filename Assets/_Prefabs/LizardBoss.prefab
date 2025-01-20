@@ -194,7 +194,7 @@ MonoBehaviour:
   speed: 2
   curHealth: 0
   heroTargeted: {fileID: 0}
-  heroDectionRadius: 2
+  heroDectionRadius: 1
   heroDectionLayer:
     serializedVersion: 2
     m_Bits: 64
