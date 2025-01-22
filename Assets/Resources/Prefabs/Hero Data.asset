@@ -12,88 +12,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3a1b210431e2d4999eda3acf8690c4, type: 3}
   m_Name: Hero Data
   m_EditorClassIdentifier: 
-  shopHero:
+  heroData:
   - heroName: Spearman
     id: 0
     isUnlocked: 0
-    unlockCost: 100
     unlockedLevel: 0
     heroLevel:
     - damage: 10
-      maxHealth: 400
+      maxHp: 400
       armor: 15
+      unlockCost: 100
     - damage: 15
-      maxHealth: 430
+      maxHp: 430
       armor: 20
+      unlockCost: 200
     - damage: 20
-      maxHealth: 480
+      maxHp: 480
       armor: 27
+      unlockCost: 400
     - damage: 30
-      maxHealth: 550
+      maxHp: 550
       armor: 33
+      unlockCost: 800
     - damage: 45
-      maxHealth: 700
+      maxHp: 700
       armor: 40
+      unlockCost: 1600
   - heroName: Axman
     id: 1
     isUnlocked: 0
-    unlockCost: 300
     unlockedLevel: 0
     heroLevel:
     - damage: 25
-      maxHealth: 460
+      maxHp: 460
       armor: 20
+      unlockCost: 300
     - damage: 32
-      maxHealth: 540
+      maxHp: 540
       armor: 25
+      unlockCost: 600
     - damage: 40
-      maxHealth: 650
+      maxHp: 650
       armor: 30
+      unlockCost: 1200
     - damage: 54
-      maxHealth: 790
+      maxHp: 790
       armor: 40
+      unlockCost: 2400
     - damage: 66
-      maxHealth: 960
+      maxHp: 960
       armor: 55
+      unlockCost: 4800
   - heroName: Swordman
     id: 2
     isUnlocked: 0
-    unlockCost: 500
     unlockedLevel: 0
     heroLevel:
     - damage: 15
-      maxHealth: 750
+      maxHp: 750
       armor: 40
-    - damage: 18
-      maxHealth: 820
+      unlockCost: 500
+    - damage: 15
+      maxHp: 820
       armor: 45
+      unlockCost: 1000
     - damage: 21
-      maxHealth: 950
+      maxHp: 950
       armor: 52
+      unlockCost: 2000
     - damage: 25
-      maxHealth: 1100
+      maxHp: 1100
       armor: 60
+      unlockCost: 4000
     - damage: 30
-      maxHealth: 1350
+      maxHp: 1350
       armor: 75
+      unlockCost: 8000
   - heroName: Archer
     id: 3
     isUnlocked: 0
-    unlockCost: 1000
     unlockedLevel: 0
     heroLevel:
     - damage: 60
-      maxHealth: 350
+      maxHp: 350
       armor: 10
+      unlockCost: 500
     - damage: 70
-      maxHealth: 380
+      maxHp: 380
       armor: 15
+      unlockCost: 1000
     - damage: 85
-      maxHealth: 430
+      maxHp: 430
       armor: 22
+      unlockCost: 2000
     - damage: 100
-      maxHealth: 500
+      maxHp: 500
       armor: 30
+      unlockCost: 4000
     - damage: 120
-      maxHealth: 600
+      maxHp: 600
       armor: 40
+      unlockCost: 8000
