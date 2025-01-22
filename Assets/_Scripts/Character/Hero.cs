@@ -19,7 +19,7 @@ public class Hero : Actor
     [SerializeField] private LayerMask enemyDectionLayer;
     [SerializeField] private LayerMask enemyCastleDectionLayer;
     [SerializeField] private SpriteRenderer sprite;
-    public ShopHeroData heroData;
+    public AllHeroData heroData;
 
     protected override void Awake()
     {
@@ -38,9 +38,9 @@ public class Hero : Actor
     private void SetData()
     {
         level = DataPlayer.GetLevelHero(id);
-        damage = heroData.shopHero[id].heroLevel[level].damage;
-        maxHealth = heroData.shopHero[id].heroLevel[level].maxHealth;
-        armor = heroData.shopHero[id].heroLevel[level].armor;
+        damage = heroData.heroData[id].heroLevel[level].damage;
+        maxHealth = heroData.heroData[id].heroLevel[level].maxHp;
+        armor = heroData.heroData[id].heroLevel[level].armor;
     }
     private void GetTakeDamageTextPosition()
     {

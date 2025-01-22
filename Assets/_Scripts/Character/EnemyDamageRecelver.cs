@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDamageRecelver : MonoBehaviour
+public class EnemyDamageRecelver : DamageReceiver<FindNearestEnemy>
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void OnDead()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void OnHurt()
     {
-        
+        throw new System.NotImplementedException();
     }
 }

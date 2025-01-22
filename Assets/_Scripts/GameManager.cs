@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class GameManager : MonoBehaviour
+public class GameManager : LoadData
 {
     public static GameManager Instance;
 
     [Header("Actor:")]
-    public List<GameObject> hero = new List<GameObject>();
-    public List<GameObject> enemy = new List<GameObject>();
+    [SerializeField] private GameObject[] hero;
+    [SerializeField] private GameObject[] enemy; 
 
     [Header("Castle Actor:")]
     [SerializeField] private Castle heroCastle;
@@ -34,11 +33,44 @@ public class GameManager : MonoBehaviour
     float spawnTime;
     [SerializeField] private Transform enemySpawnPosition;
 
-    private void Awake()
+    protected override void LoadComponents()
     {
+        base.LoadComponents();
         LoadSingleton();
-        SetValue();
+        LoadHeroData();
+        LoadEnemyData();
     }
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        isSpawnBoss = true;
+    }
+    protected virtual void LoadHeroData()
+    {
+        if (this.hero != null) return;
+        this.hero = Resources.LoadAll<GameObject>("Prefabs/Hero");
+        Debug.Log(transform.name + ": ListHero ", gameObject);
+    } 
+    protected virtual void LoadEnemyData()
+    {
+        if (this.enemy != null) return;
+        this.enemy = Resources.LoadAll<GameObject>("Prefabs/Enemy");
+        Debug.Log(transform.name + ": ListEnemy ", gameObject);
+    }
+    private void Start()
+    {
+        SetID();
+    }
+
+    private void SetID()
+    {
+        if (hero == null || hero.Length == 0) return;
+        for (int i = 0; i < hero.Length; i++)
+        {
+            hero[i].GetComponent<HeroStats>().SetID(i);
+        }
+    }
+
     private void Update()
     {
         GameOver();
@@ -50,14 +82,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
-    private void SetValue()
-    {
-        isSpawnBoss = true;
-        Physics2D.IgnoreLayerCollision(6, 6);
-        Physics2D.IgnoreLayerCollision(7, 7);
-        Physics2D.IgnoreLayerCollision(6, 8);
-        Physics2D.IgnoreLayerCollision(7, 9);
     }
    
     private void LevelDesign()
@@ -118,7 +142,7 @@ public class GameManager : MonoBehaviour
     }
     public void InstantiateHero(int id)
     {
-        if (hero == null || hero.Count == 0) return;
+        if (hero == null || hero.Length == 0) return;
         Instantiate(hero[id], transform.position, Quaternion.identity);
     }
     private void InstantiatEnenmy(int numberOfTypes)

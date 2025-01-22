@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [CreateAssetMenu(fileName = "Hero Data", menuName = "HeroData")]
-public class ShopHeroData : ScriptableObject
+public class AllHeroData : ScriptableObject
 {
-    public ShopHeroElement[] shopHero;
+    public HeroData[] heroData;
 }
 [System.Serializable]
-public class ShopHeroElement
+public class HeroData
 {
     public string heroName;
     public int id;
     public bool isUnlocked;
-    public int unlockCost;
     public int unlockedLevel;
-    public HeroStats[] heroLevel;
+    public HeroLevelStats[] heroLevel;
 }
 [System.Serializable]
-public class HeroStats
+public class HeroLevelStats
 {
     public int damage;
-    public int maxHealth;
+    public int maxHp;
     public int armor;
+    public int unlockCost;
 }
