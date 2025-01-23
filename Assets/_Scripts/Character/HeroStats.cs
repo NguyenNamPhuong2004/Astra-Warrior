@@ -11,6 +11,7 @@ public class HeroStats : LoadData
     public int damage;
     public int maxHp;
     public int armor;
+    public int speed;
 
     protected override void LoadComponents()
     {
@@ -29,6 +30,7 @@ public class HeroStats : LoadData
         damage = allHeroData.heroData[id].heroLevel[level].damage;
         maxHp = allHeroData.heroData[id].heroLevel[level].maxHp;
         armor = allHeroData.heroData[id].heroLevel[level].armor;
+        speed = 5;
     }
     public void SetID(int id)
     {

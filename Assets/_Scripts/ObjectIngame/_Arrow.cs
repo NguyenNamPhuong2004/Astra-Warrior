@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class Arrow : PoolObj
 {
     [SerializeField] private int speed = 20;
     [SerializeField] private int lifetime = 2;
@@ -31,6 +31,11 @@ public class Arrow : MonoBehaviour
     public void DestroyArrow()
     {
         ArrowPool.Instance.ReturnArrowToPool(gameObject);
+    }
+
+    public override string GetName()
+    {
+        throw new System.NotImplementedException();
     }
 }
 

@@ -1597,7 +1597,8 @@ MonoBehaviour:
   heroTargeted: {fileID: 2109490197}
   arrow: {fileID: 703674599}
   nextStats: {fileID: 222789493}
-  currentIndex: 0
+  currentHeroIndex: 0
+  currentHeroLevel: 0
   cost: 0
 --- !u!1 &140056641
 GameObject:

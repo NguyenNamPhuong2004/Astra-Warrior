@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Actor : MonoBehaviour
+public class Actor : PoolObj
 {
     public int damage;
     public int maxHealth;
@@ -10,7 +10,7 @@ public class Actor : MonoBehaviour
     public int speed;
     public int curHealth;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         curHealth = maxHealth;
     }
@@ -19,4 +19,8 @@ public class Actor : MonoBehaviour
     protected virtual void Attack() { }
     public virtual void Dead() { }
 
+    public override string GetName()
+    {
+        throw new System.NotImplementedException();
+    }
 }
