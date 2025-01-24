@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowRainParticle : MonoBehaviour
 {
-    public ArrowRain arrowRain;
+    public ArrowRainSkill arrowRain;
     private void OnParticleCollision(GameObject other)
     {
         if (other.CompareTag("Enemy"))

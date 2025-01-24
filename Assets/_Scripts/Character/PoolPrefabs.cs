@@ -32,4 +32,9 @@ public abstract class PoolPrefabs<T> : LoadData where T : PoolObj
 
         return null;
     }
+    public virtual T GetByID(int id)
+    {
+        if (id >= prefabs.Length) return null;
+        return this.prefabs[id];
+    }
 }

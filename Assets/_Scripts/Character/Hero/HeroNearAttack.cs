@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NearAttack : HeroAttack
+public class HeroNearAttack : HeroAttack
 {
     protected override void TakeDamage()
     {

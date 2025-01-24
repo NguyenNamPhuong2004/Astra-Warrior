@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarAttack : HeroAttack
+public class HeroFarAttack : HeroAttack
 {
     [SerializeField] protected ArrowSpawning arrowSpawning;
 

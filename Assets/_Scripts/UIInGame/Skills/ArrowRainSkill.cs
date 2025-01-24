@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ArrowRain : MonoBehaviour
+public class ArrowRainSkill : MonoBehaviour
 {
     public ShopCastleData arrowRainData;
     int level;

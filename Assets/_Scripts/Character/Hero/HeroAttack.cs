@@ -6,7 +6,14 @@ public class HeroAttack : LoadData
 {
     [SerializeField] protected Animator animator;
     [SerializeField] protected FindNearestEnemy findNearestEnemy;
-   // [SerializeField] protected HeroDamageSender heroDamageSender;
+    // [SerializeField] protected HeroDamageSender heroDamageSender;
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        LoadAnimator();
+        LoadFindNearestEnemy();
+    }
     protected virtual void LoadAnimator()
     {
         if (this.animator != null) return;
@@ -16,7 +23,7 @@ public class HeroAttack : LoadData
     protected virtual void LoadFindNearestEnemy()
     {
         if (this.findNearestEnemy != null) return;
-        this.findNearestEnemy = GetComponentInChildren<FindNearestEnemy>();
+        this.findNearestEnemy = GetComponent<FindNearestEnemy>();
         Debug.Log(transform.name + ": FindNearestEnemy", gameObject);
     }
     //protected virtual void LoadHeroDamageSender()

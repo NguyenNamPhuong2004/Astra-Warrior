@@ -17,10 +17,13 @@ public class HeroInGameBtn : MonoBehaviour
     [SerializeField] private Image spawnTimeBar;
     [SerializeField] private Image heroGraphic;
     [SerializeField] private Food food;
+
+    [SerializeField] private HeroSpawning heroSpawning;
+    [SerializeField] private Vector3 spawnHeroPosition;
     private void Awake()
     {
         purchaseBtn = GetComponent<Button>();
-        purchaseBtn.onClick.AddListener(OnPurchase);
+        purchaseBtn.onClick.AddListener(OnSpawnHero);
         costTxt.text = cost.ToString();
         curSpawnTime = spawnTime;
     }
@@ -37,9 +40,9 @@ public class HeroInGameBtn : MonoBehaviour
         this.id = id;
     }
 
-    private void OnPurchase()
+    private void OnSpawnHero()
     {
-        GameManager.Instance.InstantiateHero(id);
+        heroSpawning.Spawning(spawnHeroPosition, id);
         StartCoroutine(SpawnTime());
         food.food -= cost;
     }

@@ -9,10 +9,7 @@ public class HeroSpawning : LoadData
 
     [SerializeField] protected HeroPrefabs prefabs;
     public HeroPrefabs Prefabs => prefabs;
-    
-
-    [SerializeField] protected float spawnSpeed = 1f;
-    [SerializeField] protected int maxSpawn = 10;
+   
     [SerializeField] protected List<Hero> spawnedHeros = new();
     protected override void LoadComponents()
     {
@@ -39,14 +36,10 @@ public class HeroSpawning : LoadData
         //this.RemoveDeadOne();
     }
 
-    protected virtual void Spawning()
+    public virtual void Spawning(Vector3 spawnHeroPosition, int id)
     {
-        Invoke(nameof(this.Spawning), this.spawnSpeed);
-
-        if (this.spawnedHeros.Count >= this.maxSpawn) return;
-
-        Hero prefab = this.Prefabs.GetRandom();
-        Hero newHero = this.Spawner.Spawn(prefab, transform.position);
+        Hero prefab = this.Prefabs.GetByID(id);
+        Hero newHero = this.Spawner.Spawn(prefab, spawnHeroPosition);
         this.spawnedHeros.Add(newHero);
     }
 
