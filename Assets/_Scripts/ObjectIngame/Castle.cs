@@ -21,7 +21,7 @@ public class Castle : MonoBehaviour
     private void SetData()
     {
         level = DataPlayer.GetLevelCastle();
-        maxHealth = castleData.shopCastle.castleLevel[level].heathMax;
+        maxHealth = castleData.shopCastle.castleLevel[level].maxHp;
         armor = castleData.shopCastle.castleLevel[level].armor;
     }
     private void Update()

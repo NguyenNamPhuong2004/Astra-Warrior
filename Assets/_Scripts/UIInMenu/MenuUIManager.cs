@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UIInMenu : MonoBehaviour
+public class MenuUIManager : Singleton<MenuUIManager>
 {
     public GameObject Shop;
     public GameObject Setting;
@@ -17,8 +17,9 @@ public class UIInMenu : MonoBehaviour
     public Slider musicController;
     public Slider soundController;
 
-    private void Awake()
+    protected override void Awake()
     {
+        MakeSingleton(false);
         musicController.value = DataPlayer.GetMusic();
         soundController.value = DataPlayer.GetSound();
     }
@@ -34,69 +35,64 @@ public class UIInMenu : MonoBehaviour
         SoundManager.Ins.AufxRain.volume = musicController.value;
         SoundManager.Ins.AufxClick.volume = soundController.value;
     }
-    public void disPlayLevel()
+    public void OpenLevel()
     {
-        if (Level.activeSelf) unDisPlayLevel();
+        if (Level.activeSelf) CloseLevel();
         else Level.SetActive(true);
         SoundManager.Ins.ButtonSound();
     }
-    public void unDisPlayLevel()
+    public void CloseLevel()
     {
         Level.SetActive(false);
     }
-    public void displayShop()
+    public void OpenShop()
     {
         Shop.SetActive(true);
         SoundManager.Ins.ButtonSound();
     }
-    public void unDisplayShop()
+    public void CloseShop()
     {
         Shop.SetActive(false);
         SoundManager.Ins.ButtonSound();
     }
-    public void displayEarnCoin()
+    public void OpenEarnCoin()
     {
         EarnCoin.SetActive(true);
         SoundManager.Ins.ButtonSound();
     }
-    public void unDisplayEarnCoin()
+    public void CloseEarnCoin()
     {
         EarnCoin.SetActive(false);
         SoundManager.Ins.ButtonSound();
     }
-    public void displaySetting()
+    public void OpenSetting()
     {
         Setting.SetActive(true);
         SoundManager.Ins.ButtonSound();
     }
-    public void unDisplaySetting()
+    public void CloseSetting()
     {
         Setting.SetActive(false);
         SoundManager.Ins.ButtonSound();
     }
-    public void displayShopHero()
+    public void OpenShopHero()
     {
         ShopHero.transform.SetSiblingIndex(ShopHero.transform.parent.childCount - 1);
         SoundManager.Ins.ButtonSound();
     }
-    public void displayShopCastle()
+    public void OpenShopCastle()
     {
         ShopCastle.transform.SetSiblingIndex(ShopCastle.transform.parent.childCount - 1);
         SoundManager.Ins.ButtonSound();
     }
-    public void displayDailyReward()
+    public void OpenDailyReward()
     {
         DailyReward.transform.SetSiblingIndex(ShopHero.transform.parent.childCount - 1);
         SoundManager.Ins.ButtonSound();
     }
-    public void displayAds()
+    public void OpenAds()
     {
         Ads.transform.SetSiblingIndex(ShopCastle.transform.parent.childCount - 1);
-        SoundManager.Ins.ButtonSound();
-    }
-    public void ResetDataGame()
-    {
-        DataPlayer.ResetGameData();
         SoundManager.Ins.ButtonSound();
     }
     public void QuitGame()

@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UIInGame : MonoBehaviour
+public class GameUIManager : Singleton<GameUIManager>
 {
-    public GameObject setting;
-    public Slider musicController;
-    public Slider soundController;
-    private void Awake()
+    protected override void Awake()
     {
+        MakeSingleton(false);
         musicController.value = DataPlayer.GetMusic();
         soundController.value = DataPlayer.GetSound();
     }
+    public GameObject setting;
+    public Slider musicController;
+    public Slider soundController;
     private void Update()
     {
         ControllVolume();
@@ -26,13 +27,13 @@ public class UIInGame : MonoBehaviour
         SoundManager.Ins.AufxRain.volume = musicController.value;
         SoundManager.Ins.AufxClick.volume = soundController.value;
     }
-    public void displaySetting()
+    public void OpenSetting()
     {
         Time.timeScale = 0;
         setting.SetActive(true);
         SoundManager.Ins.ButtonSound();
     }
-    public void unDisplaySetting()
+    public void CloseSetting()
     {
         Time.timeScale = 1;
         setting.SetActive(false);

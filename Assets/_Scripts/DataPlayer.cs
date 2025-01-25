@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DataPlayer
 {
     private const string ALL_DATA = "all_data";
     public static AllData allData;
+
+    public static UnityEvent updateCoinEvent = new();
+    public static UnityEvent updateCurrentLevelEvent = new();
     static DataPlayer()
     {
         allData = JsonUtility.FromJson<AllData>(PlayerPrefs.GetString(ALL_DATA));
@@ -102,6 +106,7 @@ public class DataPlayer
     public static void SetCoin(int cost)
     {
         allData.SetCoin(cost);
+        updateCoinEvent?.Invoke();
         SaveData();
     }
     public static bool IsEnoughMoney(int cost)
@@ -111,6 +116,7 @@ public class DataPlayer
     public static void AddCoin(int money)
     {
         allData.AddCoin(money);
+        updateCoinEvent?.Invoke();
         SaveData();
     }
     public static void SetisTime(bool istime)
@@ -191,6 +197,22 @@ public class DataPlayer
     public static float GetSound()
     {
         return allData.GetSound();
+    }
+    public static void AddListenerUpdateCoinEvent(UnityAction updateCoin)
+    {
+        updateCoinEvent.AddListener(updateCoin);
+    }
+    public static void RemoveListenerUpdateCoinEvent(UnityAction updateCoin)
+    {
+        updateCoinEvent.RemoveListener(updateCoin);
+    }
+    public static void AddListenerUpdateCurrentLevelEvent(UnityAction updateCurrentLevel)
+    {
+        updateCurrentLevelEvent.AddListener(updateCurrentLevel);
+    }
+    public static void RemoveListenerUpdateCurrentLevelEvent(UnityAction updateCurrentLevel)
+    {
+        updateCurrentLevelEvent.RemoveListener(updateCurrentLevel);
     }
     public static void ResetGameData()
     {

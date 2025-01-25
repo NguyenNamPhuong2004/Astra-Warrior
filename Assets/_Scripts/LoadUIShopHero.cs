@@ -165,5 +165,4 @@ public class LoadUIShopHero : LoadData
         this.nextStats = transform.Find("Stats").Find("NextStats").gameObject;
         Debug.Log(transform.name + ": nextStats", gameObject);
     }
-  
 }

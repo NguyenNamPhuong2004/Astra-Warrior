@@ -12,4 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b239a17e59add7d49a8936c2f1531520, type: 3}
   m_Name: Enemy Data
   m_EditorClassIdentifier: 
-  enemyData: []
+  enemyData:
+  - enemyName: Lizard
+    id: 0
+    damage: 30
+    maxHp: 450
+    armor: 30
+  - enemyName: Lizard Boss
+    id: 1
+    damage: 50
+    maxHp: 800
+    armor: 45
+  - enemyName: Demon
+    id: 2
+    damage: 45
+    maxHp: 700
+    armor: 40
+  - enemyName: Demon Boss
+    id: 3
+    damage: 65
+    maxHp: 1000
+    armor: 55

@@ -7,22 +7,24 @@ using UnityEngine.UI;
 public class Food : MonoBehaviour
 {
     public ShopCastleData foodData;
-    [SerializeField] private Text foodText;
-    int level;
-    public int food;
-    [SerializeField] private int maxFood;
-    [SerializeField] private float updateSpeed;
+    private int level;
+    private int currentFood;
+    private int maxFood;
+    private float updateSpeed;
     private float curUpdateSpeed;
+
+    public int CurrentFood { get => currentFood; private set => currentFood = value; }
+    public int MaxFood { get => maxFood; private set => maxFood = value; }
 
     private void Awake()
     {
-        food = 0;
+        CurrentFood = 0;
         SetData();
     }
     private void SetData()
     {
         level = DataPlayer.GetLevelFood();
-        maxFood = foodData.shopFood.foodLevel[level].foodMax;
+        MaxFood = foodData.shopFood.foodLevel[level].foodMax;
         updateSpeed = foodData.shopFood.foodLevel[level].foodSpeed;
     }
     private void FixedUpdate()
@@ -31,12 +33,11 @@ public class Food : MonoBehaviour
     }
     private void UpdateFood()
     {
-        if (food >= maxFood) return;
+        if (CurrentFood >= MaxFood) return;
         if (curUpdateSpeed <= 0)
         {
             curUpdateSpeed = updateSpeed;
-            food += 1;
-            foodText.text = food.ToString() + " / " + maxFood.ToString();
+            CurrentFood += 1;
         }
         else
         {

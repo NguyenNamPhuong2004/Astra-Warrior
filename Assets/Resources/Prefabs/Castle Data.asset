@@ -14,46 +14,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopCastle:
     ItemName: Castle
-    unlockCost: 100
     unlockedLevel: 0
     castleLevel:
-    - heathMax: 8000
+    - maxHp: 8000
       armor: 80
-    - heathMax: 9000
+      unlockCost: 100
+    - maxHp: 9000
       armor: 90
-    - heathMax: 11500
+      unlockCost: 200
+    - maxHp: 10500
       armor: 115
-    - heathMax: 13000
+      unlockCost: 400
+    - maxHp: 12000
       armor: 130
-    - heathMax: 15000
+      unlockCost: 800
+    - maxHp: 14000
       armor: 150
+      unlockCost: 1600
   shopArrows:
     ItemName: Arrows
-    unlockCost: 100
     unlockedLevel: 0
     arrowsLevel:
     - damage: 20
       timeSkill: 20
+      unlockCost: 100
     - damage: 25
       timeSkill: 18
+      unlockCost: 200
     - damage: 35
       timeSkill: 15
+      unlockCost: 400
     - damage: 47
       timeSkill: 12
+      unlockCost: 800
     - damage: 60
       timeSkill: 8
+      unlockCost: 1600
   shopFood:
     ItemName: Food
-    unlockCost: 100
     unlockedLevel: 0
     foodLevel:
     - foodMax: 50
       foodSpeed: 2
+      unlockCost: 100
     - foodMax: 100
       foodSpeed: 3
+      unlockCost: 200
     - foodMax: 150
       foodSpeed: 4
+      unlockCost: 400
     - foodMax: 200
       foodSpeed: 5
+      unlockCost: 800
     - foodMax: 250
       foodSpeed: 6
+      unlockCost: 1600
