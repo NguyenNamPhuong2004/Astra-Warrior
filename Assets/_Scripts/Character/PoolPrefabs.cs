@@ -21,6 +21,11 @@ public abstract class PoolPrefabs<T> : LoadData where T : PoolObj
         int rand = Random.Range(0, this.prefabs.Length);
         return this.prefabs[rand];
     }
+    public virtual T GetRandom(int id)
+    {
+        int rand = Random.Range(0, id);
+        return this.prefabs[rand];
+    }
 
     public virtual T GetByName(string prefabName)
     {

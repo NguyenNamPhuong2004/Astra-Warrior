@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : LoadData
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance;
-
-    [Header("Actor:")]
-    [SerializeField] private GameObject[] hero;
-    [SerializeField] private GameObject[] enemy; 
-
-    [Header("Castle Actor:")]
-    [SerializeField] private Castle heroCastle;
-    [SerializeField] private Castle enemyCastle;
+    [Header("Enemy Component:")]
+    [SerializeField] private EnemySpawning enemySpawning; 
+    [SerializeField] private EnemyCastleDamageReceiver enemyCastleDamageReceiver;
 
 
     [Header("Game Over UI:")]
@@ -32,56 +26,38 @@ public class GameManager : LoadData
     int spawnEnemyTime;
     float spawnTime;
     [SerializeField] private Transform enemySpawnPosition;
-
+    protected override void Awake()
+    {
+        base.Awake();
+        MakeSingleton(false);
+    }
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        LoadSingleton();
-        LoadHeroData();
-        LoadEnemyData();
+        LoadEnemySpawning();
+        LoadEnemyCastleDamageReceiver();
     }
     protected override void ResetValue()
     {
         base.ResetValue();
         isSpawnBoss = true;
     }
-    protected virtual void LoadHeroData()
+    protected virtual void LoadEnemySpawning()
     {
-        if (this.hero != null) return;
-        this.hero = Resources.LoadAll<GameObject>("Prefabs/Hero");
-        Debug.Log(transform.name + ": ListHero ", gameObject);
+        if (this.enemySpawning != null) return;
+        this.enemySpawning = GameObject.FindObjectOfType<EnemySpawning>();
+        Debug.Log(transform.name + ": EnemySpawning ", gameObject);
     } 
-    protected virtual void LoadEnemyData()
+    protected virtual void LoadEnemyCastleDamageReceiver()
     {
-        if (this.enemy != null) return;
-        this.enemy = Resources.LoadAll<GameObject>("Prefabs/Enemy");
-        Debug.Log(transform.name + ": ListEnemy ", gameObject);
-    }
-    private void Start()
-    {
-        SetID();
-    }
-
-    private void SetID()
-    {
-        if (hero == null || hero.Length == 0) return;
-        for (int i = 0; i < hero.Length; i++)
-        {
-            hero[i].GetComponent<HeroStats>().SetID(i);
-        }
+        if (this.enemyCastleDamageReceiver != null) return;
+        this.enemyCastleDamageReceiver = GameObject.FindObjectOfType<EnemyCastleDamageReceiver>();
+        Debug.Log(transform.name + ": EnemyCastleDamageReceiver ", gameObject);
     }
 
     private void Update()
     {
-        GameOver();
         LevelDesign();
-    }
-    private void LoadSingleton() 
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
     }
    
     private void LevelDesign()
@@ -90,9 +66,9 @@ public class GameManager : LoadData
         {
             case 1:
                 SpawnEnemy(15, 20, 1);
-                if(enemyCastle.curHealth < enemyCastle.maxHealth && isSpawnBoss == true)
+                if(enemyCastleDamageReceiver.IsHurt() && isSpawnBoss == true)
                 {
-                    Instantiate(enemy[1], enemySpawnPosition.position, Quaternion.identity);
+                    enemySpawning.ByIDSpawning(1);
                     isSpawnBoss = false;
                 }
                 break; 
@@ -101,9 +77,9 @@ public class GameManager : LoadData
                 break;
             case 3:
                 SpawnEnemy(10, 15, 2);
-                if (enemyCastle.curHealth < enemyCastle.maxHealth && isSpawnBoss == true)
+                if (enemyCastleDamageReceiver.IsHurt() && isSpawnBoss == true)
                 {
-                    Instantiate(enemy[2], enemySpawnPosition.position, Quaternion.identity);
+                    enemySpawning.ByIDSpawning(2);
                     isSpawnBoss = false;
                 }
                 background1.color = new Color32(100, 100, 100, 255);
@@ -118,8 +94,6 @@ public class GameManager : LoadData
                 break;
             case 5:
                 SpawnEnemy(7, 12, 4);
-                enemyCastle.maxHealth += 10000;
-                enemyCastle.armor += 100;
                 background1.color = new Color32(100, 100, 100, 255);
                 background2.color = new Color32(100, 100, 100, 255);
                 rain.Play();
@@ -128,10 +102,10 @@ public class GameManager : LoadData
     }
     private void SpawnEnemy(int minTime, int maxTime, int numberOfTypes)
     {
-        if (enemyCastle.isDead() || enemyCastle == null) return;
+        if (enemyCastleDamageReceiver.IsDead() || enemyCastleDamageReceiver == null) return;
         if (spawnTime <= 0f)
         {
-            InstantiatEnenmy(numberOfTypes);
+            enemySpawning.RandomSpawning(numberOfTypes);
             spawnEnemyTime = Random.Range(minTime, maxTime);
             spawnTime = spawnEnemyTime;
         }
@@ -140,33 +114,8 @@ public class GameManager : LoadData
             spawnTime -= Time.deltaTime;
         }
     }
-    public void InstantiateHero(int id)
-    {
-        if (hero == null || hero.Length == 0) return;
-        Instantiate(hero[id], transform.position, Quaternion.identity);
-    }
-    private void InstantiatEnenmy(int numberOfTypes)
-    {
-        int id = Random.Range(0, numberOfTypes);
-        Instantiate(enemy[id], enemySpawnPosition.position, Quaternion.identity);
-    }
-
-    private void GameOver()
-    {
-        if (heroCastle.isDead() && heroCastle != null)
-        {
-            Defeat();
-        }
-        if (enemyCastle.isDead() && enemyCastle != null)
-        {
-            Victory();
-        }
-        
-    }
-    private void Defeat()
-    {
-        Destroy(heroCastle.gameObject);
-
+    public void Defeat()
+    {  
         gameEqualText.text = "DEFEAT";
         gameOverDialog.SetActive(true);
         nextLevelBtn.SetActive(false);
@@ -177,10 +126,8 @@ public class GameManager : LoadData
 
         SoundManager.Ins.Defeat();
     }
-    private void Victory()
+    public void Victory()
     {
-        Destroy(enemyCastle.gameObject);
-
         gameEqualText.text = "VICTORY";
         gameOverDialog.SetActive(true);
         nextLevelBtn.SetActive(true);

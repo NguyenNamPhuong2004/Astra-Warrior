@@ -14,26 +14,9 @@ public class MenuUIManager : Singleton<MenuUIManager>
     public GameObject DailyReward;
     public GameObject Ads;
     public GameObject Level;
-    public Slider musicController;
-    public Slider soundController;
-
     protected override void Awake()
     {
         MakeSingleton(false);
-        musicController.value = DataPlayer.GetMusic();
-        soundController.value = DataPlayer.GetSound();
-    }
-    private void Update()
-    {
-        ControllVolume();
-    }
-    private void ControllVolume()
-    {
-        DataPlayer.SetMusic(musicController.value);
-        DataPlayer.SetSound(soundController.value);
-        SoundManager.Ins.AufxBackground.volume = musicController.value;
-        SoundManager.Ins.AufxRain.volume = musicController.value;
-        SoundManager.Ins.AufxClick.volume = soundController.value;
     }
     public void OpenLevel()
     {

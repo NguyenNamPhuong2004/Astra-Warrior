@@ -38,10 +38,22 @@ public class EnemySpawning : LoadData
         //this.RemoveDeadOne();
     }
 
-    protected virtual void Spawning()
+    public virtual void RandomSpawning()
     {
-        Invoke(nameof(this.Spawning), this.spawnSpeed);
         Enemy prefab = this.Prefabs.GetRandom();
+        Enemy newEnemy = this.Spawner.Spawn(prefab, transform.position);
+        this.spawnedEnemys.Add(newEnemy);
+    }
+    public virtual void RandomSpawning(int id)
+    {
+        Enemy prefab = this.Prefabs.GetRandom(id);
+        Enemy newEnemy = this.Spawner.Spawn(prefab, transform.position);
+        this.spawnedEnemys.Add(newEnemy);
+    }
+
+    public virtual void ByIDSpawning(int id)
+    {
+        Enemy prefab = this.Prefabs.GetByID(id);
         Enemy newEnemy = this.Spawner.Spawn(prefab, transform.position);
         this.spawnedEnemys.Add(newEnemy);
     }

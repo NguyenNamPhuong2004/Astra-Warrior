@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroSpawn : MonoBehaviour
+public class UIHeroSpawns : LoadData
 {
-    [SerializeField] private HeroInGameBtn[] heroSpawn;
-    private void Awake()
+    [SerializeField] private UIHeroSpawn[] heroSpawn;
+    protected override void LoadComponents()
     {
-        heroSpawn = GetComponentsInChildren<HeroInGameBtn>();
+        base.LoadComponents();
+        LoadUIHeroSpawn();
+    }
+    private void LoadUIHeroSpawn()
+    {
+        if (this.heroSpawn != null) return;
+        this.heroSpawn = GetComponentsInChildren<UIHeroSpawn>();
+        Debug.Log(transform.name + ": LoadUIHeroSpawn ", gameObject);
     }
     private void Start()
     {

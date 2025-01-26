@@ -13,7 +13,7 @@ public class Food : MonoBehaviour
     private float updateSpeed;
     private float curUpdateSpeed;
 
-    public int CurrentFood { get => currentFood; private set => currentFood = value; }
+    public int CurrentFood { get => currentFood; set => currentFood = value; }
     public int MaxFood { get => maxFood; private set => maxFood = value; }
 
     private void Awake()

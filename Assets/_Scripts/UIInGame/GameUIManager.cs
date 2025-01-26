@@ -6,26 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameUIManager : Singleton<GameUIManager>
 {
+   
+    public GameObject setting;
     protected override void Awake()
     {
         MakeSingleton(false);
-        musicController.value = DataPlayer.GetMusic();
-        soundController.value = DataPlayer.GetSound();
-    }
-    public GameObject setting;
-    public Slider musicController;
-    public Slider soundController;
-    private void Update()
-    {
-        ControllVolume();
-    }
-    private void ControllVolume()
-    {   
-        DataPlayer.SetMusic(musicController.value);
-        DataPlayer.SetSound(soundController.value);
-        SoundManager.Ins.AufxBackground.volume = musicController.value;
-        SoundManager.Ins.AufxRain.volume = musicController.value;
-        SoundManager.Ins.AufxClick.volume = soundController.value;
     }
     public void OpenSetting()
     {

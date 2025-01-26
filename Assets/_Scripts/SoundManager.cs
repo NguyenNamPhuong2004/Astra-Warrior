@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
-    public static SoundManager Ins;
     public AudioSource AufxClick;
     public AudioSource AufxRain;
     public AudioSource AufxBackground;
@@ -17,18 +16,6 @@ public class SoundManager : MonoBehaviour
     public AudioClip swordAttack;
     public AudioClip arrowAttack;
     public AudioClip typeKeyBoard;
-    private void Awake()
-    {
-        if (Ins == null)
-        {
-            Ins = this;
-            DontDestroyOnLoad(Ins);
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
     private void OnValidate()
     {
         if (AufxClick == null)
