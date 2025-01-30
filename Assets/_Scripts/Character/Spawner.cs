@@ -54,23 +54,23 @@ public abstract class Spawner<T> : LoadData where T : PoolObj
             newObject = Instantiate(prefab);
             this.spawnCount++;
             this.UpdateName(prefab.transform, newObject.transform);
+
             newObject.transform.parent = this.holder;
         }
-
+        else newObject.gameObject.SetActive(true);
         return newObject;
     }
 
     protected virtual T GetObjFromPool(T prefab)
-    {
-        foreach (T inPoolObj in this.inPoolObjects)
-        {
-            if (prefab.GetName() == inPoolObj.GetName())
-            {
-                this.RemoveObjectFromPool(inPoolObj);
-                return inPoolObj;
+    {      
+        foreach (T inPoolObj in this.inPoolObjects)      
+        {       
+            if (prefab.GetName() == inPoolObj.GetName())         
+            {        
+                this.RemoveObjectFromPool(inPoolObj);        
+                return inPoolObj;         
             }
         }
-
         return null;
     }
 
@@ -81,7 +81,8 @@ public abstract class Spawner<T> : LoadData where T : PoolObj
 
     protected virtual void UpdateName(Transform prefab, Transform newObject)
     {
-        newObject.name = prefab.name + "_" + this.spawnCount;
+       // newObject.name = prefab.name + "_" + this.spawnCount;
+        newObject.name = prefab.name;
     }
 
     public virtual void Despawn(T obj)

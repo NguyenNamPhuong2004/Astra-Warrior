@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeroNearAttack : HeroAttack
 {
-    protected override void TakeDamage()
+    public override void TakeDamage()
     {
         base.TakeDamage();
         SoundManager.Ins.SwordAttack();

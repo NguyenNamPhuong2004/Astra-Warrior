@@ -17,13 +17,13 @@ public class EnemyAttack : LoadData
     protected virtual void LoadAnimator()
     {
         if (this.animator != null) return;
-        this.animator = GetComponentInChildren<Animator>();
+        this.animator = transform.parent.GetComponent<Animator>();
         Debug.Log(transform.name + ": Animator", gameObject);
     }
     protected virtual void LoadFindNearestHero()
     {
         if (this.findNearestHero != null) return;
-        this.findNearestHero = GetComponent<FindNearestHero>();
+        this.findNearestHero = transform.parent.GetComponentInChildren<FindNearestHero>();
         Debug.Log(transform.name + ": FindNearestHero", gameObject);
     }
     //protected virtual void LoadHeroDamageSender()
@@ -32,6 +32,10 @@ public class EnemyAttack : LoadData
     //    this.heroDamageSender = GetComponentInChildren<HeroDamageSender>();
     //    Debug.Log(transform.name + ": HeroDamageSender", gameObject);
     //}
+    private void Update()
+    {
+        Attack();
+    }
     protected virtual void Attack()
     {
         if (findNearestHero.target == null) return;
@@ -40,7 +44,7 @@ public class EnemyAttack : LoadData
         //Speed = speed;
         //speed = 0;
     }
-    protected virtual void TakeDamage()
+    public virtual void TakeDamage()
     {
         if (findNearestHero.target == null)
         {

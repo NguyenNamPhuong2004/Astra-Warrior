@@ -16,7 +16,7 @@ public abstract class PoolObj : LoadData
     protected virtual void LoadDespawn()
     {
         if (this.despawn != null) return;
-        this.despawn = transform.GetComponentInChildren<DespawnBase>();
+        this.despawn = GetComponentInChildren<DespawnBase>();
         Debug.Log(transform.name + ": LoadDespawn", gameObject);
     }
 }

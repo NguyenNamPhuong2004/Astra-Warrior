@@ -10,7 +10,7 @@ public class CurentLevelText : TextAbstract
     }
     private void UpdateView()
     {
-        text.text = DataPlayer.GetLevelGame().ToString();
+        text.text = "Level:" + DataPlayer.GetLevelGame().ToString();
     }
     private void OnEnable()
     {

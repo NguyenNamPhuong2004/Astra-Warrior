@@ -26,6 +26,7 @@ public class UIHeroSpawn : LoadData
         LoadPurchaseBtn();
         LoadSpawnTimeBar();
         LoadHeroGraphic();
+        LoadFood();
         LoadHeroSpawning();
     }
     private void LoadCostTxt()
@@ -49,13 +50,20 @@ public class UIHeroSpawn : LoadData
     private void LoadHeroGraphic()
     {
         if (this.heroGraphic != null) return;
-        this.heroGraphic = transform.Find("Graphic").GetComponent<Image>();
+        this.heroGraphic = GetComponent<Image>();
         Debug.Log(transform.name + ": LoadHeroGraphic ", gameObject);
+    }
+    private void LoadFood()
+    {
+        if (this.food != null) return;
+        this.food = GameObject.Find("Food").GetComponent<Food>();
+        Debug.Log(transform.name + ": LoadFood ", gameObject);
     } 
+
     private void LoadHeroSpawning()
     {
         if (this.heroSpawning != null) return;
-        this.heroSpawning = GameObject.Find("HeroSpawning").GetComponent<HeroSpawning>();
+        this.heroSpawning = GameObject.FindObjectOfType<HeroSpawning>();
         Debug.Log(transform.name + ": LoadHeroSpawning ", gameObject);
     }
     protected override void ResetValue()
@@ -65,6 +73,25 @@ public class UIHeroSpawn : LoadData
         spawnTime = 7 - id;
         curSpawnTime = spawnTime;
         costTxt.text = cost.ToString();
+        SetCost();
+    }
+    private void SetCost()
+    {
+        switch (id)
+        {
+            case 0: 
+                cost = 30;
+                break;
+            case 1:
+                cost = 65;
+                break;
+            case 2:
+                cost = 115;
+                break;
+            case 3:
+                cost = 160;
+                break;
+        }
     }
     private void Update()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DamageTextSpawning : LoadData
 {
@@ -39,11 +40,13 @@ public class DamageTextSpawning : LoadData
         //this.RemoveDeadOne();
     }
 
-    public virtual void Spawning(Vector3 spawnDamageTextPosition)
+    public virtual void Spawning(Vector3 spawnDamageTextPosition, string color, int damage)
     {
-        if (this.spawnedDamageTexts.Count >= this.maxSpawn) return;
         DamageText prefab = this.Prefabs.GetRandom();
         DamageText newDamageText = this.Spawner.Spawn(prefab, spawnDamageTextPosition);
         this.spawnedDamageTexts.Add(newDamageText);
+        newDamageText.GetComponentInChildren<Text>().text = damage.ToString();
+        if (color == "Green") newDamageText.GetComponentInChildren<Text>().color = new Color(0, 1, 0, 1);
+        else newDamageText.GetComponentInChildren<Text>().color = new Color(1, 0, 0, 1);
     }
 }

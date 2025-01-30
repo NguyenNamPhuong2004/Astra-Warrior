@@ -29,7 +29,14 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        MakeSingleton(false);
+       // MakeSingleton(false);
+    }
+    private void Start()
+    {
+        Physics2D.IgnoreLayerCollision(6, 6);
+        Physics2D.IgnoreLayerCollision(7, 7);
+        Physics2D.IgnoreLayerCollision(6, 8);
+        Physics2D.IgnoreLayerCollision(7, 9);
     }
     protected override void LoadComponents()
     {
@@ -41,6 +48,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.ResetValue();
         isSpawnBoss = true;
+        spawnTime = 0;
     }
     protected virtual void LoadEnemySpawning()
     {
@@ -62,11 +70,14 @@ public class GameManager : Singleton<GameManager>
    
     private void LevelDesign()
     {
+        Debug.Log("1");
         switch (DataPlayer.GetLevelGame())
         {
             case 1:
+                Debug.Log("2");
                 SpawnEnemy(15, 20, 1);
-                if(enemyCastleDamageReceiver.IsHurt() && isSpawnBoss == true)
+                Debug.Log("3");
+                if (enemyCastleDamageReceiver.IsHurt() && isSpawnBoss == true)
                 {
                     enemySpawning.ByIDSpawning(1);
                     isSpawnBoss = false;
@@ -103,9 +114,12 @@ public class GameManager : Singleton<GameManager>
     private void SpawnEnemy(int minTime, int maxTime, int numberOfTypes)
     {
         if (enemyCastleDamageReceiver.IsDead() || enemyCastleDamageReceiver == null) return;
+        Debug.Log("4");
         if (spawnTime <= 0f)
         {
+            Debug.Log("5");
             enemySpawning.RandomSpawning(numberOfTypes);
+            Debug.Log("6");
             spawnEnemyTime = Random.Range(minTime, maxTime);
             spawnTime = spawnEnemyTime;
         }

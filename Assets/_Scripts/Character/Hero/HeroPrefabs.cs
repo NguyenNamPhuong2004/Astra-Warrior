@@ -20,7 +20,7 @@ public class HeroPrefabs : PoolPrefabs<Hero>
         if (prefabs == null || prefabs.Length == 0) return;
         for (int i = 0; i < prefabs.Length; i++)
         {
-            prefabs[i].GetComponent<HeroStats>().SetID(i);
+            prefabs[i].GetComponentInChildren<HeroStats>().SetID(i);
         }
     }
 }

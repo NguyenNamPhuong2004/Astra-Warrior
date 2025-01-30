@@ -29,7 +29,7 @@ public class SheldSkill : MonoBehaviour
             if (col.GetComponentInChildren<Sheld>() != null) continue;
             GameObject sheld = Instantiate(sheldPrefab, col.transform.position, Quaternion.identity);
             sheld.transform.SetParent(col.transform);
-            col.GetComponent<Hero>().armor += 150;
+            col.GetComponentInChildren<HeroDamageReceiver>().Armor += 150;
         }
         StartCoroutine(SpawnTime());
     }

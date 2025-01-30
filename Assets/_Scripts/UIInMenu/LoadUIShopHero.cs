@@ -66,7 +66,7 @@ public class LoadUIShopHero : LoadData
     protected virtual void LoadSelectHeroGraphics()
     {
         if (this.selectHeroGraphics != null && this.selectHeroGraphics.Length > 0) return;
-        this.selectHeroGraphics = transform.Find("HeroElementGraphics").GetComponentsInChildren<Image>();
+        this.selectHeroGraphics = transform.Find("HeroElementBtns").GetComponentsInChildren<Image>();
         Debug.Log(transform.name + ": SelectHeroGraphics", gameObject);
     }
     protected virtual void LoadPurchaseBtn()

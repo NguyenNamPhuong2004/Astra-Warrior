@@ -8,10 +8,10 @@ public abstract class Despawn<T> : DespawnBase where T : PoolObj
     [SerializeField] protected float timeLife = 7f;
     [SerializeField] protected float currentTime = 7f;
 
-    protected virtual void FixedUpdate()
-    {
-        this.DespawnByTime();
-    }
+    //protected virtual void FixedUpdate()
+    //{
+    //    this.DespawnByTime();
+    //}
 
     protected override void LoadComponents()
     {

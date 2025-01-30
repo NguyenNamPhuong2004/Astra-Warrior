@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroDamageReceiver : DamageReceiver<FindNearestHero>
+public class HeroDamageReceiver : DamageReceiverToTarget<FindNearestHero>
 {
     [SerializeField] private HeroStats heroStats;
     [SerializeField] private Animator animator;
-    [SerializeField] private CapsuleCollider capsuleCollider;
+    [SerializeField] private CapsuleCollider2D capsuleCollider;
+    [SerializeField] private Rigidbody2D rigid2D;
     [SerializeField] private Hero hero;
     [SerializeField] private DamageTextSpawning damageTextSpawning;
     protected override void LoadComponents()
@@ -17,37 +18,44 @@ public class HeroDamageReceiver : DamageReceiver<FindNearestHero>
         LoadCapsuleCollider();
         LoadHero();
         LoadDamageTextSpawning();
+        LoadRigidbody2D();
     }
 
     private void LoadHeroStats()
     {
         if (this.heroStats != null) return;
-        this.heroStats = GetComponent<HeroStats>();
+        this.heroStats = transform.parent.GetComponentInChildren<HeroStats>();
         Debug.Log(transform.name + ": HeroStats", gameObject);
     }
     private void LoadAnimator()
     {
         if (this.animator != null) return;
-        this.animator = GetComponentInChildren<Animator>();
+        this.animator = transform.parent.GetComponent<Animator>();
         Debug.Log(transform.name + ": LoadAnimator", gameObject);
     }
     private void LoadCapsuleCollider()
     {
         if (this.capsuleCollider != null) return;
-        this.capsuleCollider = GetComponent<CapsuleCollider>();
+        this.capsuleCollider = transform.parent.GetComponent<CapsuleCollider2D>();
         Debug.Log(transform.name + ": LoadCapsuleCollider", gameObject);
     } 
     private void LoadHero()
     {
         if (this.hero != null) return;
-        this.hero = GetComponent<Hero>();
+        this.hero = transform.parent.GetComponent<Hero>();
         Debug.Log(transform.name + ": LoadHero", gameObject);
     }
     private void LoadDamageTextSpawning()
     {
         if (this.damageTextSpawning != null) return;
-        this.damageTextSpawning = GetComponentInChildren<DamageTextSpawning>();
+        this.damageTextSpawning = GameObject.FindObjectOfType<DamageTextSpawning>();
         Debug.Log(transform.name + ": LoadDamageTextSpawning", gameObject);
+    } 
+    private void LoadRigidbody2D()
+    {
+        if (this.rigid2D != null) return;
+        this.rigid2D = transform.parent.GetComponent<Rigidbody2D>();
+        Debug.Log(transform.name + ": LoadRigidbody2D", gameObject);
     }
     
     protected override void ResetValue()
@@ -55,27 +63,29 @@ public class HeroDamageReceiver : DamageReceiver<FindNearestHero>
         base.ResetValue();
         maxHP = heroStats.maxHp;
         armor = heroStats.armor;
-        currentHP = maxHP;
+        currentHP = MaxHP;
     }
     protected override void OnDead()
     {
-        damageTextSpawning.Spawning(damageTextSpawning.transform.position);
+        damageTextSpawning.Spawning(transform.position, "Red",realDamage);
         animator.SetTrigger("Dead");
         this.capsuleCollider.enabled = false;
-        Invoke(nameof(this.DoDespawn), 2f);
+        this.rigid2D.bodyType = RigidbodyType2D.Kinematic;
+
     }
-    private void DoDespawn()
+    public void DoDespawn()
     {
         hero.Despawn.DoDespawn();
     }
 
     protected override void OnHurt()
     {
-        damageTextSpawning.Spawning(damageTextSpawning.transform.position);
+        damageTextSpawning.Spawning(transform.position, "Red",realDamage);
     }
     protected override void Reborn()
     {
         base.Reborn();
         this.capsuleCollider.enabled = true;
+        this.rigid2D.bodyType = RigidbodyType2D.Dynamic;
     }
 }

@@ -5,14 +5,18 @@ using UnityEngine;
 public class HeroFarAttack : HeroAttack
 {
     [SerializeField] protected ArrowSpawning arrowSpawning;
-
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        LoadArrowSpawning();
+    }
     protected virtual void LoadArrowSpawning()
     {
         if (this.arrowSpawning != null) return;
-        this.arrowSpawning = GameObject.FindObjectOfType<ArrowSpawning>();
+        this.arrowSpawning = transform.parent.GetComponentInChildren<ArrowSpawning>();
         Debug.Log(transform.name + ": LoadArrowSpawning", gameObject);
     }
-    protected override void TakeDamage()
+    public override void TakeDamage()
     {
         base.TakeDamage();
         SoundManager.Ins.ArrowAttack();

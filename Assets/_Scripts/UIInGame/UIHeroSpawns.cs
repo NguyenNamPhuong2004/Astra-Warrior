@@ -10,15 +10,19 @@ public class UIHeroSpawns : LoadData
         base.LoadComponents();
         LoadUIHeroSpawn();
     }
+    protected override void ResetValue()
+    {
+        base.ResetValue();
+        SetID();
+    }
     private void LoadUIHeroSpawn()
     {
-        if (this.heroSpawn != null) return;
+        if (this.heroSpawn == null && this.heroSpawn.Length > 0) return;
         this.heroSpawn = GetComponentsInChildren<UIHeroSpawn>();
         Debug.Log(transform.name + ": LoadUIHeroSpawn ", gameObject);
     }
     private void Start()
     {
-        SetID();
         SetHeroBtn();
     }
     private void SetID()

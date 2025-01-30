@@ -4,7 +4,7 @@
 
     public class Singleton<T> : LoadData where T : MonoBehaviour
     {
-        public string sceneName;
+       // public string sceneName;
         protected int numofEnterScene;
 
         // private static instance
@@ -22,9 +22,9 @@
             set => m_ins = value;
         }
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
-            MakeSingleton(true);
+            MakeSingleton(false);
         }
 
         protected void MakeSingleton(bool destroyOnload)

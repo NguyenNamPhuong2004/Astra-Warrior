@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroDamageSender : DamageSender<FindNearestEnemy>
+public class HeroDamageSender : DamageSenderToTarget<FindNearestEnemy>
 {
     [SerializeField] private HeroStats heroStats;
 
@@ -16,7 +16,7 @@ public class HeroDamageSender : DamageSender<FindNearestEnemy>
     private void LoadHeroStats()
     {
         if (this.heroStats != null) return;
-        this.heroStats = GetComponent<HeroStats>();
+        this.heroStats = transform.parent.GetComponentInChildren<HeroStats>();
         Debug.Log(transform.name + ": HeroStats", gameObject);
     }
 

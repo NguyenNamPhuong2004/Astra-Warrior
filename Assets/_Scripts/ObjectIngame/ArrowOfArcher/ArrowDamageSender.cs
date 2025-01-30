@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowDamageSender : DamageSender<FindNearestEnemy>
+public class ArrowDamageSender : DamageSenderToTarget<FindNearestEnemy>
 {
     [SerializeField] private HeroStats heroStats;
 

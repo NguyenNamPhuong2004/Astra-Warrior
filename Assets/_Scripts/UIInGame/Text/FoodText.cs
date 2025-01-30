@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FoodText : TextAbstract
 {
@@ -13,7 +14,7 @@ public class FoodText : TextAbstract
     private void LoadFood()
     {
         if (this.food != null) return;
-        this.food = GetComponent<Food>();
+        this.food = transform.parent.GetComponent<Food>();
         Debug.Log(transform.name + ": Food", gameObject);
     }
     private void FixedUpdate()

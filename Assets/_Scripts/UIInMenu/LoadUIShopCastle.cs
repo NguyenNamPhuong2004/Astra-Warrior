@@ -70,7 +70,7 @@ public class LoadUIShopCastle : LoadData
     protected virtual void LoadSelectHeroGraphics()
     {
         if (this.selectItemGraphics != null && this.selectItemGraphics.Length > 0) return;
-        this.selectItemGraphics = transform.Find("CastleElementGraphics").GetComponentsInChildren<Image>();
+        this.selectItemGraphics = transform.Find("CastleElementBtns").GetComponentsInChildren<Image>();
         Debug.Log(transform.name + ": SelectItemGraphics", gameObject);
     }
     protected virtual void LoadPurchaseBtn()
@@ -88,13 +88,13 @@ public class LoadUIShopCastle : LoadData
     protected virtual void LoadItemNameText()
     {
         if (this.itemNameText != null) return;
-        this.itemNameText = transform.Find("ItemTargeted").Find("ItemTargetedName").GetComponent<Text>();
+        this.itemNameText = transform.Find("ItemTargeted").Find("TargetedName").GetComponent<Text>();
         Debug.Log(transform.name + ": ItemNameText", gameObject);
     }
     protected virtual void LoadItemTargeted()
     {
         if (this.itemTargeted != null) return;
-        this.itemTargeted = transform.Find("ItemTargeted").Find("ItemTargetedGraphic").GetComponent<Image>();
+        this.itemTargeted = transform.Find("ItemTargeted").Find("TargetedGraphic").GetComponent<Image>();
         Debug.Log(transform.name + ": ItemTargeted", gameObject);
     }
     protected virtual void LoadCostText()

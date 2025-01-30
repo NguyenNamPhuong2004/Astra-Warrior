@@ -15,7 +15,7 @@ public class UIShopCastle : LoadUIShopCastle
         costText.text = shopCastleData.shopCastle.castleLevel[currentItemLevel].unlockCost.ToString();
         SetItemData();
         purchaseBtn.onClick.AddListener(UpgradeButton);
-        itemTargeted.sprite = selectItemBtns[currentItemIndex].transform.GetChild(0).GetComponentInChildren<Image>().sprite;
+        itemTargeted.sprite = selectItemGraphics[currentItemIndex].sprite;
     }
 
     private void SetItemData()
@@ -90,7 +90,7 @@ public class UIShopCastle : LoadUIShopCastle
     {
         SoundManager.Ins.ButtonSound();
         currentItemIndex = index;
-        itemTargeted.sprite = selectItemBtns[index].transform.GetChild(0).GetComponent<Image>().sprite;
+        itemTargeted.sprite = selectItemGraphics[currentItemIndex].sprite;
         SetItemData();
     }
     private void UpgradeButton()
