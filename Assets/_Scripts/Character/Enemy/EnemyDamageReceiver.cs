@@ -9,6 +9,7 @@ public class EnemyDamageReceiver : DamageReceiverToTarget<FindNearestEnemy>
     [SerializeField] private CapsuleCollider2D capsuleCollider;
     [SerializeField] private Rigidbody2D rigid2D;
     [SerializeField] private Enemy enemy;
+    [SerializeField] private FindNearestHero findNearestHero;
     [SerializeField] private DamageTextSpawning damageTextSpawning;
 
     protected override void LoadComponents()
@@ -18,6 +19,7 @@ public class EnemyDamageReceiver : DamageReceiverToTarget<FindNearestEnemy>
         LoadAnimator();
         LoadCapsuleCollider();
         LoadEnemy();
+        LoadFindNearestHero();
         LoadDamageTextSpawning();
         LoadRigidbody2D();
     }
@@ -45,6 +47,12 @@ public class EnemyDamageReceiver : DamageReceiverToTarget<FindNearestEnemy>
         if (this.enemy != null) return;
         this.enemy = transform.parent.GetComponent<Enemy>();
         Debug.Log(transform.name + ": LoadEnemy", gameObject);
+    }
+    private void LoadFindNearestHero()
+    {
+        if (this.findNearestHero != null) return;
+        this.findNearestHero = transform.parent.GetComponentInChildren<FindNearestHero>();
+        Debug.Log(transform.name + ": LoadFindNearestHero", gameObject);
     }
     private void LoadDamageTextSpawning()
     {
@@ -75,6 +83,7 @@ public class EnemyDamageReceiver : DamageReceiverToTarget<FindNearestEnemy>
     public void DoDespawn()
     {
         enemy.Despawn.DoDespawn();
+        findNearestHero.target = null;
     }
 
     protected override void OnHurt()

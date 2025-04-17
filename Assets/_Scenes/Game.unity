@@ -12706,7 +12706,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00914073, y: 0.13904345}
+  m_Offset: {x: -0.025872946, y: 0.13904333}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -12717,7 +12717,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.9501371, y: 4.294836}
+  m_Size: {x: 3.9166727, y: 4.294836}
   m_EdgeRadius: 0
 --- !u!212 &1388289500
 SpriteRenderer:
@@ -13718,15 +13718,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec96d4cac290cd74e94e514e00f48218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 10
-  maxHP: 10
-  armor: 10
+  currentHP: 8000
+  maxHP: 8000
+  armor: 80
   realDamage: 10
   isDead: 0
   updateHPBar:
     m_PersistentCalls:
       m_Calls: []
-  heroCastleStats: {fileID: 0}
+  heroCastleStats: {fileID: 409802582}
 --- !u!1 &1628818604
 GameObject:
   m_ObjectHideFlags: 0

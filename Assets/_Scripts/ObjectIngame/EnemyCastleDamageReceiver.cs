@@ -29,7 +29,7 @@ public class EnemyCastleDamageReceiver : DamageReceiverToTarget<FindNearestEnemy
     protected override void OnDead()
     {
         GameManager.Ins.Victory();
-        Destroy(transform.parent);
+        Destroy(transform.parent.gameObject);
     }
     public virtual bool IsHurt()
     {

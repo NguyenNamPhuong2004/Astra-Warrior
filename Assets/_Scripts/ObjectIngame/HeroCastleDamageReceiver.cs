@@ -28,7 +28,7 @@ public class HeroCastleDamageReceiver : DamageReceiverToTarget<FindNearestHero>
     protected override void OnDead()
     {
         GameManager.Ins.Defeat();
-        Destroy(transform.parent);
+        Destroy(transform.parent.gameObject);
     }
     public override void Receive(int damage, DamageSenderToTarget<FindNearestHero> damageSender)
     {

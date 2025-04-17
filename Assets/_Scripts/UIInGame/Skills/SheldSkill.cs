@@ -26,10 +26,21 @@ public class SheldSkill : MonoBehaviour
         var heroFindeds = Physics2D.OverlapCircleAll(transform.position, dectionRadius, dectionLayer);
         foreach(Collider2D col in heroFindeds)
         {
-            if (col.GetComponentInChildren<Sheld>() != null) continue;
-            GameObject sheld = Instantiate(sheldPrefab, col.transform.position, Quaternion.identity);
-            sheld.transform.SetParent(col.transform);
-            col.GetComponentInChildren<HeroDamageReceiver>().Armor += 150;
+            if (col.GetComponentInChildren<Sheld>() != null)
+            {
+                if (col.GetComponentInChildren<Sheld>().gameObject.activeSelf == true) continue;
+                else
+                {
+                    col.GetComponentInChildren<Sheld>().gameObject.SetActive(true);
+                    col.GetComponentInChildren<HeroDamageReceiver>().Armor += 150;
+                }
+            }
+            else
+            {
+                GameObject sheld = Instantiate(sheldPrefab, col.transform.position, Quaternion.identity);
+                sheld.transform.SetParent(col.transform);
+                col.GetComponentInChildren<HeroDamageReceiver>().Armor += 150;
+            }
         }
         StartCoroutine(SpawnTime());
     }

@@ -9,6 +9,7 @@ public class HeroDamageReceiver : DamageReceiverToTarget<FindNearestHero>
     [SerializeField] private CapsuleCollider2D capsuleCollider;
     [SerializeField] private Rigidbody2D rigid2D;
     [SerializeField] private Hero hero;
+    [SerializeField] private FindNearestEnemy findNearestEnemy;
     [SerializeField] private DamageTextSpawning damageTextSpawning;
     protected override void LoadComponents()
     {
@@ -17,6 +18,7 @@ public class HeroDamageReceiver : DamageReceiverToTarget<FindNearestHero>
         LoadAnimator();
         LoadCapsuleCollider();
         LoadHero();
+        LoadFindNearestEnemy();
         LoadDamageTextSpawning();
         LoadRigidbody2D();
     }
@@ -45,6 +47,12 @@ public class HeroDamageReceiver : DamageReceiverToTarget<FindNearestHero>
         this.hero = transform.parent.GetComponent<Hero>();
         Debug.Log(transform.name + ": LoadHero", gameObject);
     }
+    private void LoadFindNearestEnemy()
+    {
+        if (this.findNearestEnemy != null) return;
+        this.findNearestEnemy = transform.parent.GetComponentInChildren<FindNearestEnemy>();
+        Debug.Log(transform.name + ": LoadFindNearestEnemy", gameObject);
+    }
     private void LoadDamageTextSpawning()
     {
         if (this.damageTextSpawning != null) return;
@@ -71,11 +79,16 @@ public class HeroDamageReceiver : DamageReceiverToTarget<FindNearestHero>
         animator.SetTrigger("Dead");
         this.capsuleCollider.enabled = false;
         this.rigid2D.bodyType = RigidbodyType2D.Kinematic;
-
     }
     public void DoDespawn()
     {
         hero.Despawn.DoDespawn();
+        findNearestEnemy.target = null;
+        if (transform.parent.GetComponentInChildren<Sheld>() != null && transform.parent.GetComponentInChildren<Sheld>().gameObject.activeSelf == true) 
+        {
+            transform.parent.GetComponentInChildren<Sheld>().gameObject.SetActive(false);
+            armor -= 150;
+        }
     }
 
     protected override void OnHurt()

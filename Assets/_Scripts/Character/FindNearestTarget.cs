@@ -13,15 +13,19 @@ public abstract class FindNearestTarget : LoadData
 
     protected virtual void FixedUpdate()
     {
-        DetectEnemy();
+        DetectTarget();
     }
-    protected virtual void DetectEnemy()
+    protected virtual void DetectTarget()
     {
         var targetFindeds = Physics2D.OverlapCircleAll(transform.position, targetDectionRadius, targetDectionLayer);
-        var targetCastleFindeds = Physics2D.OverlapCircleAll(transform.position, targetDectionRadius, targetCastleDectionLayer);
+        var targetCastleFindeds = Physics2D.OverlapCircleAll(transform.position, targetDectionRadius - 0.5f, targetCastleDectionLayer);
         var finalTarget = NearestTarget(targetFindeds);
         var finalTargetCastle = NearestTarget(targetCastleFindeds);
-        if (finalTarget == null && finalTargetCastle == null) return;
+        if (finalTarget == null && finalTargetCastle == null)
+        {
+            target = null;
+            return;
+        }
         if (finalTarget != null) target = finalTarget;
         else target = finalTargetCastle;
     }
